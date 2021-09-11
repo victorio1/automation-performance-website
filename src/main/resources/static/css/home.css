@@ -1,0 +1,21 @@
+:root {
+    --primary: #6209DB;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+}
+.navbar{
+    min-height: 90px;
+}
+.btn-primary{
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+.btn-primary:hover{
+    background-color: var(--primary);
+}
+
+.background{
+    background-img: url('https://images.hdqwalls.com/wallpapers/the-big-universe-is-here-4k-q4.jpg');
+    background-size: cover;
+}
