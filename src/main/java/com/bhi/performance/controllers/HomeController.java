@@ -18,8 +18,13 @@ public class HomeController {
     @GetMapping("/")
     public String index()
     {
+        return "home";
+    }
 
-        return "index";
+    @GetMapping("/home1")
+    public String home() throws IOException, InterruptedException {
+        System.out.println("El pepe");
+        return "strategic1";
     }
 
     @GetMapping("/task")
@@ -100,7 +105,7 @@ public class HomeController {
         Process process = Runtime.getRuntime().exec(
                 new String[]{"cmd","/c",cmd},
                 null,
-                new File("D:\\Personal\\apache-jmeter-5.4.1\\bin")
+                new File("C:\\apache-jmeter-5.4.1\\bin")
         );
         System.out.println("Create Process " + environment);
         BufferedReader output = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -143,7 +148,7 @@ public class HomeController {
         Process process = Runtime.getRuntime().exec(
                 new String[]{"cmd","/c","taskkill /F /T /PID " + processId},
                 null,
-                new File("D:\\Personal\\apache-jmeter-5.4.1\\bin")
+                new File("C:\\apache-jmeter-5.4.1\\bin")
         );
         System.out.println("Kill Process");
         BufferedReader output = new BufferedReader(new InputStreamReader(process.getInputStream()));
