@@ -93,3 +93,10 @@
     background: #6165D7;
     border-radius: 4px;
 }
+
+.background-image{
+    background-image: url('/image/background.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
