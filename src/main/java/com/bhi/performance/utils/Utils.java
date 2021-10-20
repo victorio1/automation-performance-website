@@ -10,6 +10,18 @@ public class Utils {
 
     public static long processId;
 
+    public static long sprintProcessId = -1;
+
+    public static long pointReleaseProcessId = -1;
+
+    public static long strategic1ProcessId = -1;
+
+    public static long strategic2ProcessId = -1;
+
+    public static long strategic3ProcessId = -1;
+
+    public static long strategic4ProcessId = -1;
+
     public static long getProcessID(Process p)
     {
         long result = -1;
