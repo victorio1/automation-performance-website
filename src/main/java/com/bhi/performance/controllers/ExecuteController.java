@@ -1,6 +1,7 @@
 package com.bhi.performance.controllers;
 
 import com.bhi.performance.utils.Utils;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,41 +26,107 @@ public class ExecuteController {
     }
 
     @PostMapping("/stop")
-    public String stop(@RequestParam(name = "sprint", required = false) String sprint, @RequestParam(name = "pointrelease", required = false) String pointrelease,
+    public ModelAndView stop(@RequestParam(name = "sprint", required = false) String sprint, @RequestParam(name = "pointrelease", required = false) String pointrelease,
                        @RequestParam(name = "strategic1", required = false) String strategic1, @RequestParam(name = "strategic2", required = false) String strategic2,
-                       @RequestParam(name = "strategic3", required = false) String strategic3, @RequestParam(name = "strategic4", required = false) String strategic4, ModelMap model
+                       @RequestParam(name = "strategic3", required = false) String strategic3, @RequestParam(name = "strategic4", required = false) String strategic4
+
     ) throws IOException, InterruptedException {
-        if (Utils.sprintProcessId  > -1) {
-            this.kill(Utils.sprintProcessId);
-            Utils.sprintProcessId = -1;
-            model.addAttribute("sprint","checked");
+        ModelAndView modelAndView = new ModelAndView("execute");
+        //if (!"sprint".equals(sprint))
+        {
+            if (Utils.sprintProcessId > -1) {
+                this.kill(Utils.sprintProcessId);
+                Utils.sprintProcessId = -1;
+            }
+            System.out.println("Desactivar: sprint");
         }
 
-        if (Utils.pointReleaseProcessId  > -2) {
-            this.kill(Utils.pointReleaseProcessId);
-            Utils.pointReleaseProcessId = -2;
+        //if (!"pointrelease".equals(pointrelease))
+        {
+            if (Utils.pointReleaseProcessId > -1) {
+                this.kill(Utils.pointReleaseProcessId);
+                Utils.pointReleaseProcessId = -1;
+            }
+            System.out.println("Desactivar: pointrelease");
         }
 
-        if (Utils.strategic1ProcessId  > -3) {
-            this.kill(Utils.strategic1ProcessId);
-            Utils.strategic1ProcessId = -3;
+        //if (!"strategic1".equals(strategic1))
+        {
+            if (Utils.strategic1ProcessId > -1) {
+                this.kill(Utils.strategic1ProcessId);
+                Utils.strategic1ProcessId = -1;
+            }
+            System.out.println("Desactivar: strategic1");
         }
 
-        if (Utils.strategic2ProcessId > -4) {
-            this.kill(Utils.strategic2ProcessId);
-            Utils.strategic2ProcessId = -4;
+        //if (!"strategic2".equals(strategic2))
+        {
+            if (Utils.strategic2ProcessId > -1) {
+                this.kill(Utils.strategic2ProcessId);
+                Utils.strategic2ProcessId = -1;
+            }
+            System.out.println("Desactivar: strategic2");
         }
 
-        if (Utils.strategic3ProcessId > -5) {
-            this.kill(Utils.strategic3ProcessId);
-            Utils.strategic3ProcessId = -5;
+        //if (!"strategic3".equals(strategic3))
+        {
+            if (Utils.strategic3ProcessId > -1) {
+                this.kill(Utils.strategic3ProcessId);
+                Utils.strategic3ProcessId = -1;
+            }
+            System.out.println("Desactivar: strategic3");
         }
 
-        if (Utils.strategic4ProcessId > -6) {
-            this.kill(Utils.strategic4ProcessId);
-            Utils.strategic4ProcessId = -6;
+        //if (!"strategic4".equals(strategic4))
+        {
+            if (Utils.strategic4ProcessId > -1) {
+                this.kill(Utils.strategic4ProcessId);
+                Utils.strategic4ProcessId = -1;
+            }
+            System.out.println("Desactivar: strategic4");
         }
-        return "execute";
+
+        this.loadChecked(modelAndView);
+
+        return modelAndView;
+    }
+
+    private void loadChecked(ModelAndView modelAndView){
+        if (Utils.sprintProcessId != -1) {
+            modelAndView.addObject("sprint", true);
+        } else {
+            modelAndView.addObject("sprint", false);
+        }
+
+        if (Utils.pointReleaseProcessId != -1) {
+            modelAndView.addObject("pointrelease", true);
+        } else {
+            modelAndView.addObject("pointrelease", false);
+        }
+
+        if (Utils.strategic1ProcessId != -1) {
+            modelAndView.addObject("strategic1", true);
+        } else {
+            modelAndView.addObject("strategic1", false);
+        }
+
+        if (Utils.strategic2ProcessId != -1) {
+            modelAndView.addObject("strategic2", true);
+        } else {
+            modelAndView.addObject("strategic2", false);
+        }
+
+        if (Utils.strategic3ProcessId != -1) {
+            modelAndView.addObject("strategic3", true);
+        } else {
+            modelAndView.addObject("strategic3", false);
+        }
+
+        if (Utils.strategic4ProcessId != -1) {
+            modelAndView.addObject("strategic4", true);
+        } else {
+            modelAndView.addObject("strategic4", false);
+        }
     }
 
 //    @PostMapping("/stop")
@@ -97,6 +164,7 @@ public class ExecuteController {
 //    }
 
     public String kill(Long processId) throws IOException, InterruptedException {
+        //if(true) return "";
         Process process = Runtime.getRuntime().exec(
                 new String[]{"cmd","/c","taskkill /F /T /PID " + processId},
                 null,
@@ -117,6 +185,7 @@ public class ExecuteController {
     }
 
     private Long execute(String environment) throws IOException, InterruptedException {
+        //if(true) return 1L;
         System.out.println("Create Process " + environment);
         String cmd = "";
         if (environment == "1") {
@@ -160,44 +229,44 @@ public class ExecuteController {
         ModelAndView modelAndView = new ModelAndView("stop");
         if ("sprint".equals(sprint)) {
             Utils.sprintProcessId = this.execute("1");
-            modelAndView.addObject("sprint", "1");
+            modelAndView.addObject("sprint", true);
         } else {
-            modelAndView.addObject("sprint", "0");
+            modelAndView.addObject("sprint", false);
         }
 
         if ("pointrelease".equals(pointrelease)) {
             Utils.pointReleaseProcessId = this.execute("2");
-            modelAndView.addObject("pointRelease", "1");
+            modelAndView.addObject("pointrelease", true);
         } else {
-            modelAndView.addObject("pointRelease", "0");
+            modelAndView.addObject("pointrelease", false);
         }
 
         if ("strategic1".equals(strategic1)) {
             Utils.strategic1ProcessId = this.execute("3");
-            modelAndView.addObject("strategic1", "1");
+            modelAndView.addObject("strategic1", true);
         } else {
-            modelAndView.addObject("strategic1", "0");
+            modelAndView.addObject("strategic1", false);
         }
 
         if ("strategic2".equals(strategic2)) {
             Utils.strategic2ProcessId = this.execute("4");
-            modelAndView.addObject("strategic2", "1");
+            modelAndView.addObject("strategic2", true);
         } else {
-            modelAndView.addObject("strategic2", "0");
+            modelAndView.addObject("strategic2", false);
         }
 
         if ("strategic3".equals(strategic3)) {
             Utils.strategic3ProcessId = this.execute("5");
-            modelAndView.addObject("strategic3", "1");
+            modelAndView.addObject("strategic3", true);
         } else {
-            modelAndView.addObject("strategic3", "0");
+            modelAndView.addObject("strategic3", false);
         }
 
         if ("strategic4".equals(strategic4)) {
             Utils.strategic4ProcessId = this.execute("6");
-            modelAndView.addObject("strategic4", "1");
+            modelAndView.addObject("strategic4", true);
         } else {
-            modelAndView.addObject("strategic4", "0");
+            modelAndView.addObject("strategic4", false);
         }
 
         System.out.println(sprint);

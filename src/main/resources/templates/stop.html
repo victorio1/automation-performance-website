@@ -38,34 +38,33 @@
                 </div>
                 <div class="card-body">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckSpring" name="sprint" value="sprint">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckSpring" name="sprint" value="sprint" th:checked="${sprint}" >
                         <label class="form-check-label" for="flexSwitchCheckSpring">Sprint</label>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckPointRelease" name="pointrelease" value="pointrelease">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckPointRelease" name="pointrelease" value="pointrelease" th:checked="${pointrelease}">
                         <label class="form-check-label" for="flexSwitchCheckPointRelease">Point Release</label>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckStrategic1" name="strategic1" value="strategic1">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckStrategic1" name="strategic1" value="strategic1" th:checked="${strategic1}">
                         <label class="form-check-label" for="flexSwitchCheckStrategic1">Strategic 1</label>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckStrategic2" name="strategic2" value="strategic2">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckStrategic2" name="strategic2" value="strategic2" th:checked="${strategic2}">
                         <label class="form-check-label" for="flexSwitchCheckStrategic2">Strategic 2</label>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckStrategic3" name="strategic3" value="strategic3">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckStrategic3" name="strategic3" value="strategic3" th:checked="${strategic3}">
                         <label class="form-check-label" for="flexSwitchCheckStrategic3">Strategic 3</label>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckStrategic4" name="strategic4" value="strategic4">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckStrategic4" name="strategic4" value="strategic4" th:checked="${strategic4}">
                         <label class="form-check-label" for="flexSwitchCheckStrategic4">Strategic 4</label>
                     </div>
                     <div class="col-auto mt-4">
-                        <button type="submit" onclick="return validator(event);" class="btn-user btn-user--active">ACTIVE LOAD</button>
+                        <!--<button type="submit" onclick="return validator(event);" class="btn-user btn-user--active">ACTIVE LOAD</button>-->
                         <button type="submit" class="btn-user btn-user--desactive mr-4">DESACTIVE</button>
                     </div>
-                    <div>Web Application. Passed parameter : th:text="${sprint}"</div>
                 </div>
             </div>
         </div>
